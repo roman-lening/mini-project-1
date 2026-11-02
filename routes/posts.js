@@ -1,9 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
+import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", authMiddleware, async (req, res) => {
   try {
     const postsCollection = mongoose.connection.collection("posts");
     const post = req.body ?? {};
